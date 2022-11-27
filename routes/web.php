@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-	return view('login');
-});
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show');
 
-Route::get('/singup', function () {
-	return view('singup');
-});
+Route::get('/singup', [AuthController::class, 'showRegister'])->name('register.show');
+
+Route::post('/register', [AuthController::class, 'postRegistration'])->name('register.store');
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
 
 Route::get('/reset-password', function () {
 	return view('reset-password');
@@ -29,14 +32,14 @@ Route::get('/set-new-password', function () {
 	return view('set-new-password');
 });
 
-Route::get('/email-sent', function () {
-	return view('email-sent');
-});
+Route::get('/confirmation', function () {
+	return view('messages.confirmation');
+})->name('confirmation');
 
 Route::get('/success-password', function () {
-	return view('success-password');
+	return view('messages.success-password');
 });
 
 Route::get('/success-account', function () {
-	return view('success-account');
-});
+	return view('messages.success-account');
+})->name('verified.account');
