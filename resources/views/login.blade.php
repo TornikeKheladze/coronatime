@@ -9,24 +9,14 @@
             <h3 class="text-gray-400">
                 {{ __('log-in.welcome_back') }}
             </h3>
-            <form class="flex flex-col gap-6">
-
-                <x-input type="text" name="username" label="{{ __('log-in.username') }}"
+            <form method="POST" action="{{route('login')}}" class="flex flex-col gap-6">
+                @csrf
+                <x-input type="text" name="name_mail" label="{{ __('log-in.username') }}"
                     placeholder="{{ __('log-in.uniq_emil') }}" />
                 <x-input type="password" name="password" label="{{ __('log-in.password') }}"
                     placeholder="{{ __('log-in.fill_password') }}" />
 
                 <div class="flex justify-between">
-                    <div>
-                        <input id="default-checkbox" type="checkbox" value=""
-                            class="w-4 h-4 accent-green-600 text-green-600 bg-gray-100 rounded
-                            border-gray-300 focus:ring-green-500 dark:focus:ring-green-600
-                            dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-
-                        <label for="default-checkbox" class="text-sm font-semibold ml-2">
-                            {{ __('log-in.remember') }}
-                        </label>
-                    </div>
                     <a class="text-blue-800 text-sm font-semibold">{{ __('log-in.forgot') }}</a>
                 </div>
 

@@ -9,8 +9,10 @@
             <h3 class="text-gray-400">
                 {{ __('sing-up.enter_info') }}
             </h3>
-            <form class="flex flex-col gap-6">
-                <x-input type="text" name="username" label="{{ __('sing-up.username') }}"
+            <form method="POST" action="/register" class="flex flex-col gap-6" enctype="multipart/form-data" >
+                @csrf
+
+                <x-input type="text" name="name" label="{{ __('sing-up.username') }}"
                     placeholder="{{ __('sing-up.uniq_username') }}" />
 
                 <x-input type="email" name="email" label="{{ __('sing-up.email') }}"
@@ -19,7 +21,7 @@
                 <x-input type="password" name="password" label="{{ __('sing-up.password') }}"
                     placeholder="{{ __('sing-up.fill_password') }}" />
 
-                <x-input type="password" name="password_confirm" label="{{ __('sing-up.repeat_password') }}"
+                <x-input type="password" name="password_confirmation" label="{{ __('sing-up.repeat_password') }}"
                     placeholder="{{ __('sing-up.repeat_password') }}" />
 
                 <div class="flex justify-between">

@@ -6,7 +6,8 @@
                 <img class="w-14" src="{{ asset('images/checked.png') }}" />
                 <p class="text-lg text-center">{{ $slot }}</p>
             </div>
-            <x-button text="{{ __('log-in.login') }}" />
+            <a href="{{route('login.show')}}"
+                class="w-full flex justify-center items-center bg-green-500 rounded-lg h-14 font-black text-white text-base">{{ __('log-in.login') }}</a>
         </div>
     </div>
 </x-layout>
