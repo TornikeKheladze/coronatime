@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show');
+Route::view('/login', 'login')->name('login.show');
 
-Route::get('/singup', [AuthController::class, 'showRegister'])->name('register.show');
+Route::view('/singup', 'singup')->name('register.show');
 
 Route::post('/register', [AuthController::class, 'postRegistration'])->name('register.store');
 

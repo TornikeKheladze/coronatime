@@ -9,9 +9,9 @@
             <h3 class="text-gray-400">
                 {{ __('log-in.welcome_back') }}
             </h3>
-            <form method="POST" action="/login" class="flex flex-col gap-6">
+            <form method="POST" action="{{route('login')}}" class="flex flex-col gap-6">
                 @csrf
-                <x-input type="text" name="nameOrMail" label="{{ __('log-in.username') }}"
+                <x-input type="text" name="name_mail" label="{{ __('log-in.username') }}"
                     placeholder="{{ __('log-in.uniq_emil') }}" />
                 <x-input type="password" name="password" label="{{ __('log-in.password') }}"
                     placeholder="{{ __('log-in.fill_password') }}" />

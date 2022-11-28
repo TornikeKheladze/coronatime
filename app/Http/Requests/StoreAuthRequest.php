@@ -14,7 +14,7 @@ class StoreAuthRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'nameOrMail'=> 'required',
+			'name_mail' => 'required',
 			'password'  => 'required',
 		];
 	}

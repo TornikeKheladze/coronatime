@@ -12,24 +12,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-	public function showRegister()
-	{
-		return view('singup');
-	}
-
-	public function showLogin()
-	{
-		return view('login');
-	}
-
-	// public function store(StoreUserRequest $request)
-	// {
-	// 	$attributes = $request->validated();
-	// 	$attributes['password'] = bcrypt($attributes['password']);
-	// 	User::create($attributes);
-	// 	return redirect('confirmation');
-	// }
-
 	public function postRegistration(StoreUserRequest $request)
 	{
 		$request->validated();
@@ -51,15 +33,15 @@ class AuthController extends Controller
 	public function login(StoreAuthRequest $request)
 	{
 		$attributes = $request->validated();
-		$isEmail = Str::contains($attributes['nameOrMail'], '@');
+		$isEmail = Str::contains($attributes['name_mail'], '@');
 		$credentials['password'] = $attributes['password'];
 		if ($isEmail)
 		{
-			$credentials['email'] = $attributes['nameOrMail'];
+			$credentials['email'] = $attributes['name_mail'];
 		}
 		else
 		{
-			$credentials['name'] = $attributes['nameOrMail'];
+			$credentials['name'] = $attributes['name_mail'];
 		}
 
 		if (!auth()->attempt($credentials))
