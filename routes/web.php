@@ -28,9 +28,7 @@ Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/worldwide', function () {
-	return view('landing.worldwide');
-})->name('worldwide')->middleware(['auth', 'verified']);
+Route::view('/worldwide', 'landing.worldwide')->name('worldwide')->middleware(['auth', 'verified']);
 
 Route::get('/reset-password', function () {
 	return view('reset-password');
