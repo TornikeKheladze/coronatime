@@ -1,0 +1,14 @@
+<header class="flex justify-between mt-5">
+    <img class="lg:ml-28 ml-4" src="{{ asset('images/logo.png') }}" />
+    <div class="flex items-center gap-4 lg:mr-28 mr-7">
+        <select class="bg-white" name="language" id="language">
+            <option selected value="en">English</option>
+            <option value="ka">Georgian</option>
+        </select>
+        <h1 class="lg:block hidden font-bold">User.name</h1>
+        <form method='POST' action='{{ route('logout') }}'>
+            @csrf
+            <button type='submit'>logout</button>
+        </form>
+    </div>
+</header>
