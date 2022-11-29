@@ -25,7 +25,7 @@
             </form>
             <p class="text-center">
                 <span class="text-zinc-500">{{ __('log-in.dont_have_account') }}</span>
-                <a class="font-bold">{{ __('log-in.sing_free') }}</a>
+                <a href="{{route('register.show')}}" class="font-bold">{{ __('log-in.sing_free') }}</a>
             </p>
         </div>
         <div class="hidden lg:block h-screen">

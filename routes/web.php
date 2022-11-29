@@ -14,15 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', '/login', 301);
+
 Route::view('/login', 'login')->name('login.show');
 
-Route::view('/singup', 'singup')->name('register.show');
+Route::view('/singup', 'singup')->name('register.show')->middleware('guest');
 
-Route::post('/register', [AuthController::class, 'postRegistration'])->name('register.store');
+Route::post('/register', [AuthController::class, 'postRegistration'])->name('register.store')->middleware('guest');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/worldwide', function () {
+	return view('landing.worldwide');
+})->name('worldwide')->middleware(['auth', 'verified']);
 
 Route::get('/reset-password', function () {
 	return view('reset-password');

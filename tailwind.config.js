@@ -8,8 +8,7 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        '2888': '28vw',
-        'half': '50vh'
+        '343': '343px',
       },
       colors: {
         'gr': '#E6E6E7'

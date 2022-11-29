@@ -50,7 +50,7 @@ class AuthController extends Controller
 		}
 
 		session()->regenerate();
-		return redirect()->route('confirmation');
+		return redirect()->route('worldwide');
 	}
 
 	public function verifyAccount($token)
@@ -65,5 +65,11 @@ class AuthController extends Controller
 		}
 
 		return redirect()->route('verified.account');
+	}
+
+	public function logout()
+	{
+		auth()->logout();
+		return redirect()->route('login.show');
 	}
 }
