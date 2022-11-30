@@ -9,7 +9,7 @@
             <h3 class="text-gray-400">
                 {{ __('log-in.welcome_back') }}
             </h3>
-            <form method="POST" action="{{route('login')}}" class="flex flex-col gap-6">
+            <form method="POST" action="{{ route('login', ['lang' => app()->getLocale()]) }}" class="flex flex-col gap-6">
                 @csrf
                 <x-input type="text" name="name_mail" label="{{ __('log-in.username') }}"
                     placeholder="{{ __('log-in.uniq_emil') }}" />
@@ -17,7 +17,8 @@
                     placeholder="{{ __('log-in.fill_password') }}" />
 
                 <div class="flex justify-between">
-                    <a class="text-blue-800 text-sm font-semibold">{{ __('log-in.forgot') }}</a>
+                    <a href="{{ route('password.request', ['lang' => app()->getLocale()]) }}"
+                        class="text-blue-800 text-sm font-semibold">{{ __('log-in.forgot') }}</a>
                 </div>
 
 
@@ -25,7 +26,8 @@
             </form>
             <p class="text-center">
                 <span class="text-zinc-500">{{ __('log-in.dont_have_account') }}</span>
-                <a href="{{route('register.show')}}" class="font-bold">{{ __('log-in.sing_free') }}</a>
+                <a href="{{ route('register.show', ['lang' => app()->getLocale()]) }}"
+                    class="font-bold">{{ __('log-in.sing_free') }}</a>
             </p>
         </div>
         <div class="hidden lg:block h-screen">
