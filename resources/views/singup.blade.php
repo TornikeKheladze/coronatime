@@ -9,7 +9,7 @@
             <h3 class="text-gray-400">
                 {{ __('sing-up.enter_info') }}
             </h3>
-            <form method="POST" action="/register" class="flex flex-col gap-6" enctype="multipart/form-data">
+            <form method="POST" action="{{route('register.store',['lang' => app()->getLocale()])}}" class="flex flex-col gap-6" enctype="multipart/form-data">
                 @csrf
 
                 <x-input type="text" name="name" label="{{ __('sing-up.username') }}"
@@ -33,12 +33,11 @@
                         </label>
                     </div>
 
-
                 </div class="flex justify-between">
                 <x-button text="{{ __('sing-up.sing_up') }}" />
             </form>
             <p class="text-center"><span class="text-zinc-500">{{ __('sing-up.have_account?') }}</span>
-                <a href="{{route('login.show')}}" class="font-bold">{{ __('sing-up.login') }}</a>
+                <a href="{{route('login.show',['lang'=>app()->getLocale()])}}" class="font-bold">{{ __('sing-up.login') }}</a>
             </p>
         </div>
         <div class="hidden lg:block h-screen">

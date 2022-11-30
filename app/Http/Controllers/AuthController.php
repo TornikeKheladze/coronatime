@@ -6,9 +6,13 @@ use App\Http\Requests\StoreAuthRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use App\Models\UsersVerify;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -27,7 +31,7 @@ class AuthController extends Controller
 			$message->to($request->email);
 			$message->subject('Email Verification Mail');
 		});
-		return redirect()->route('confirmation');
+		return redirect()->route('confirmation', ['lang'=>app()->getLocale()]);
 	}
 
 	public function login(StoreAuthRequest $request)
@@ -50,7 +54,7 @@ class AuthController extends Controller
 		}
 
 		session()->regenerate();
-		return redirect()->route('worldwide');
+		return redirect()->route('worldwide', ['lang'=>app()->getLocale()]);
 	}
 
 	public function verifyAccount($token)
@@ -64,12 +68,51 @@ class AuthController extends Controller
 			$verifyUser->user->save();
 		}
 
-		return redirect()->route('verified.account');
+		return redirect()->route('verified.account', ['lang'=>app()->getLocale()]);
 	}
 
 	public function logout()
 	{
 		auth()->logout();
-		return redirect()->route('login.show');
+		return redirect()->route('login.show', ['lang'=>app()->getLocale()]);
+	}
+
+	public function postVerificationMail(Request $request)
+	{
+		$request->validate(['email' => 'required|email']);
+
+		$status = Password::sendResetLink(
+			$request->only('email')
+		);
+
+		return $status === Password::RESET_LINK_SENT
+					? redirect()->route('confirmation', ['lang'=>app()->getLocale()])->with(['status' => __($status)])
+					: back()->withErrors(['email' => __($status)]);
+	}
+
+	public function postResetPassword(Request $request)
+	{
+		$request->validate([
+			'token'    => 'required',
+			'email'    => 'required|email',
+			'password' => 'required|min:8|confirmed',
+		]);
+
+		$status = Password::reset(
+			$request->only('email', 'password', 'password_confirmation', 'token'),
+			function ($user, $password) {
+				$user->forceFill([
+					'password' => Hash::make($password),
+				])->setRememberToken(Str::random(60));
+
+				$user->save();
+
+				event(new PasswordReset($user));
+			}
+		);
+
+		return $status === Password::PASSWORD_RESET
+					? redirect()->route('success.password', ['lang'=>app()->getLocale()])->with('status', __($status))
+					: back()->withErrors(['email' => [__($status)]]);
 	}
 }

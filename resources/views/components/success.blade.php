@@ -6,7 +6,7 @@
                 <img class="w-14" src="{{ asset('images/checked.png') }}" />
                 <p class="text-lg text-center">{{ $slot }}</p>
             </div>
-            <a href="{{route('login.show')}}"
+            <a href="{{route('login.show',['lang' => app()->getLocale()])}}"
                 class="w-full flex justify-center items-center bg-green-500 rounded-lg h-14 font-black text-white text-base">{{ __('log-in.login') }}</a>
         </div>
     </div>
