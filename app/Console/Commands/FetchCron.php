@@ -13,14 +13,14 @@ class FetchCron extends Command
 	 *
 	 * @var string
 	 */
-	protected $signature = 'fetch:cron';
+	protected $signature = 'coronatime:fetch-countries';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Command description';
+	protected $description = 'fetch all countries with statistics about corona';
 
 	/**
 	 * Execute the console command.

@@ -16,7 +16,7 @@
                 class="w-10/12 h-full pl-4 focus:border-none" />
         </div>
     </form>
-    <div class="lg:ml-28 lg:mr-28 ml-4 mr-4 ">
+    <div class="lg:ml-28 lg:mr-28 ml-4 mr-4">
         <x-table-header />
         <div class="flex lg:pl-10">
             <p class="lg:w-64">{{ __('landing.worldwide') }}</p>
@@ -27,7 +27,7 @@
 
         @foreach ($countries as $country)
             <div class="flex lg:pl-10">
-                <p class="lg:w-64">{{ $country->country}}</p>
+                <p class="lg:w-64">{{ $country->country }}</p>
                 <p class="lg:w-64">{{ $country->confirmed }}</p>
                 <p class="lg:w-64">{{ $country->recovered }}</p>
                 <p class="lg:w-64">{{ $country->deaths }}</p>
