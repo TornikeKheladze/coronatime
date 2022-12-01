@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,7 +42,9 @@ Route::middleware('setLocale')->group(function () {
 
 	Route::post('/logout/{lang}', [AuthController::class, 'logout'])->name('logout');
 
-	Route::view('/worldwide/{lang}', 'landing.worldwide')->name('worldwide')->middleware(['auth', 'verified']);
+	Route::get('/worldwide/{lang}', [LandingController::class, 'showWorldwide'])->name('worldwide')->middleware(['auth', 'verified']);
+
+	Route::get('/bycountry/{lang}', [LandingController::class, 'showByCountry'])->name('bycountry')->middleware(['auth', 'verified']);
 
 	Route::view('/success-password/{lang}', 'messages.success-password')->name('success.password');
 

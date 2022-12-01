@@ -1,0 +1,37 @@
+<x-layout>
+    <x-landing-header />
+    <div class="flex lg:ml-28 flex-col lg:gap-10 lg:mt-10 mt-6 mb-6 ml-4 gap-6 lg:mb-10">
+        <h1 class="text-2xl font-extrabold">{{ __('landing.worldwide-stat') }}</h1>
+        <div class="flex lg:gap-16 gap-6">
+            <a href="{{ route('worldwide', ['lang' => app()->getLocale()]) }}">{{ __('landing.worldwide') }}</a>
+            <a class="font-bold border-b-2 pb-4 border-black">{{ __('landing.by-country') }}</a>
+        </div>
+    </div>
+    <form class="lg:ml-28 ml-4">
+        <div class="w-72 flex justify-center items-center border h-12 border-neutral-200 rounded-lg">
+            <label for="search">
+                <img class="" src="{{ asset('images/search.png') }}" />
+            </label>
+            <input type="text" name="search" id="search" placeholder="{{ __('landing.search-by-country') }}"
+                class="w-10/12 h-full pl-4 focus:border-none" />
+        </div>
+    </form>
+    <div class="lg:ml-28 lg:mr-28 ml-4 mr-4 ">
+        <x-table-header />
+        <div class="flex lg:pl-10">
+            <p class="lg:w-64">{{ __('landing.worldwide') }}</p>
+            <p class="lg:w-64">{{ $newcases }}</p>
+            <p class="lg:w-64">{{ $recovered }}</p>
+            <p class="lg:w-64">{{ $death }}</p>
+        </div>
+
+        @foreach ($countries as $country)
+            <div class="flex lg:pl-10">
+                <p class="lg:w-64">{{ $country->country}}</p>
+                <p class="lg:w-64">{{ $country->confirmed }}</p>
+                <p class="lg:w-64">{{ $country->recovered }}</p>
+                <p class="lg:w-64">{{ $country->deaths }}</p>
+            </div>
+        @endforeach
+    </div>
+</x-layout>

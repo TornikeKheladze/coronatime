@@ -13,10 +13,10 @@
             <option value="ka"><a href="{{ $geo }}">Georgian</a></option>
         </select>
         
-        <h1 class="lg:block hidden font-bold">User.name</h1>
+        <h1 class="lg:block hidden font-bold">{{auth()->user()->name}}</h1>
         <form method='POST' action='{{ route('logout', ['lang' => app()->getLocale()]) }}'>
             @csrf
-            <button type='submit'>logout</button>
+            <button type='submit'>{{__('landing.logout')}}</button>
         </form>
         
     </div>
