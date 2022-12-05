@@ -7,30 +7,30 @@
             <a class="font-bold border-b-2 pb-4 border-black">{{ __('landing.by-country') }}</a>
         </div>
     </div>
-    <form class="lg:ml-28 ml-4">
+    <form method="GET" action="" class="lg:ml-28 ml-4">
         <div class="w-72 flex justify-center items-center border h-12 border-neutral-200 rounded-lg">
             <label for="search">
                 <img class="" src="{{ asset('images/search.png') }}" />
             </label>
             <input type="text" name="search" id="search" placeholder="{{ __('landing.search-by-country') }}"
-                class="w-10/12 h-full pl-4 focus:border-none" />
+                class="w-10/12 h-full pl-4 focus:border-none" value="{{ request('search') }}" />
         </div>
     </form>
     <div class="lg:ml-28 lg:mr-28 ml-4 mr-4">
         <x-table-header />
-        <div class="flex lg:pl-10">
-            <p class="lg:w-64">{{ __('landing.worldwide') }}</p>
-            <p class="lg:w-64">{{ $newcases }}</p>
-            <p class="lg:w-64">{{ $recovered }}</p>
-            <p class="lg:w-64">{{ $death }}</p>
+        <div class="flex lg:pl-10 lg:w-full w-96">
+            <p class="lg:w-64 w-1/4">{{ __('landing.worldwide') }}</p>
+            <p class="lg:w-64 w-1/4">{{ $newcases }}</p>
+            <p class="lg:w-64 w-1/4">{{ $recovered }}</p>
+            <p class="lg:w-64 w-1/4">{{ $death }}</p>
         </div>
 
         @foreach ($countries as $country)
-            <div class="flex lg:pl-10">
-                <p class="lg:w-64">{{ $country->country }}</p>
-                <p class="lg:w-64">{{ $country->confirmed }}</p>
-                <p class="lg:w-64">{{ $country->recovered }}</p>
-                <p class="lg:w-64">{{ $country->deaths }}</p>
+            <div class="flex lg:pl-10 lg:w-full w-96">
+                <p class="lg:w-64 w-1/4">{{ $country->country }}</p>
+                <p class="lg:w-64 w-1/4">{{ $country->confirmed }}</p>
+                <p class="lg:w-64 w-1/4">{{ $country->recovered }}</p>
+                <p class="lg:w-64 w-1/4">{{ $country->deaths }}</p>
             </div>
         @endforeach
     </div>

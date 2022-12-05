@@ -22,12 +22,20 @@ class LandingController extends Controller
 
 	public function showByCountry()
 	{
-		$countries = Countries::all();
-		$confirmed = $countries->sum('confirmed');
-		$recovered = $countries->sum('recovered');
-		$death = $countries->sum('deaths');
+		$countries = Countries::latest()->filter(request(['search']))->get();
+		$allCountry = Countries::all();
+		$confirmed = $allCountry->sum('confirmed');
+		$recovered = $allCountry->sum('recovered');
+		$death = $allCountry->sum('deaths');
+
+		$sort = $countries->sortBy(request('sort'));
+		if (request('by') == 'desc')
+		{
+			$sort = $countries->sortByDesc(request('sort'));
+		}
+
 		return view('landing.bycountry', [
-			'countries'=> $countries,
+			'countries'=> $sort,
 			'newcases' => $confirmed,
 			'recovered'=> $recovered,
 			'death'    => $death,

@@ -12,6 +12,13 @@ class Countries extends Model
 
 	use HasTranslations;
 
+	public function scopeFilter($query, array $filters)
+	{
+		$query->when($filters['search'] ?? false, function ($query, $search) {
+			$query->where('country', 'like', '%' . $search . '%');
+		});
+	}
+
 	public $translatable = [
 		'country',
 	];

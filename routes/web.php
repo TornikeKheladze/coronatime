@@ -15,40 +15,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/login/en', 301)->middleware('guest');
+Route::redirect('/', 'login.show', 301)->middleware('guest');
 
-Route::redirect('/', '/worldwide/en', 301)->middleware(['auth', 'verified']);
+Route::redirect('/', '/en/worldwide', 301)->middleware(['auth', 'verified']);
 
 Route::get('/reset-password/{token}', function ($token) {
 	return view('reset-password', ['token' => $token, 'lang'=>app()->getLocale()]);
 })->middleware('guest')->name('password.reset');
 
 Route::middleware('setLocale')->group(function () {
-	Route::post('/reset-password/{lang}', [AuthController::class, 'postResetPassword'])->middleware('guest')->name('password.update');
+	Route::post('/{lang}/reset-password', [AuthController::class, 'postResetPassword'])->middleware('guest')->name('password.update');
 
-	Route::view('/forgot-password/{lang}', 'forgot-password')->middleware('guest')->name('password.request');
+	Route::view('/{lang}/forgot-password', 'forgot-password')->middleware('guest')->name('password.request');
 
-	Route::post('/forgot-password/{lang}', [AuthController::class, 'postVerificationMail'])->middleware('guest')->name('password.email');
+	Route::post('/{lang}/forgot-password', [AuthController::class, 'postVerificationMail'])->middleware('guest')->name('password.email');
 
-	Route::view('/login/{lang}', 'login')->name('login.show');
+	Route::view('/{lang}/login', 'login')->name('login.show');
 
-	Route::view('/singup/{lang}', 'singup')->name('register.show')->middleware('guest');
+	Route::view('/{lang}/singup', 'singup')->name('register.show')->middleware('guest');
 
-	Route::post('/register/{lang}', [AuthController::class, 'postRegistration'])->name('register.store')->middleware('guest');
+	Route::post('/{lang}/register', [AuthController::class, 'postRegistration'])->name('register.store')->middleware('guest');
 
-	Route::post('/login/{lang}', [AuthController::class, 'login'])->name('login');
+	Route::post('/{lang}/login', [AuthController::class, 'login'])->name('login');
 
-	Route::get('account/verify/{token}/{lang}', [AuthController::class, 'verifyAccount'])->name('user.verify');
+	Route::get('/{lang}/account/verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
 
-	Route::post('/logout/{lang}', [AuthController::class, 'logout'])->name('logout');
+	Route::post('/{lang}/logout', [AuthController::class, 'logout'])->name('logout');
 
-	Route::get('/worldwide/{lang}', [LandingController::class, 'showWorldwide'])->name('worldwide')->middleware(['auth', 'verified']);
+	Route::get('/{lang}/worldwide', [LandingController::class, 'showWorldwide'])->name('worldwide')->middleware(['auth', 'verified']);
 
-	Route::get('/bycountry/{lang}', [LandingController::class, 'showByCountry'])->name('bycountry')->middleware(['auth', 'verified']);
+	Route::get('/{lang}/bycountry', [LandingController::class, 'showByCountry'])->name('bycountry')->middleware(['auth', 'verified']);
 
-	Route::view('/success-password/{lang}', 'messages.success-password')->name('success.password');
+	Route::view('/{lang}/success-password', 'messages.success-password')->name('success.password');
 
-	Route::view('/confirmation/{lang}', 'messages.confirmation')->name('confirmation');
+	Route::view('/{lang}/confirmation', 'messages.confirmation')->name('confirmation');
 
-	Route::view('/success-account/{lang}', 'messages.success-account')->name('verified.account');
+	Route::view('/{lang}/success-account', 'messages.success-account')->name('verified.account');
 });
