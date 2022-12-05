@@ -2,11 +2,11 @@ window.onload = () => {
     const name = document.querySelector('#name');
     const email = document.querySelector('#email');
     const password = document.querySelector('#password');
-    const password_confirmation = document.querySelector('#password_confirmation');
+    const passwordConfirmation = document.querySelector('#password_confirmation');
     const nameChecked = document.querySelector('#namechecked');
-    const emailchecked = document.querySelector('#emailchecked');
-    const passwordchecked = document.querySelector('#passwordchecked');
-    const password_confirmationchecked = document.querySelector('#password_confirmationchecked');
+    const emailChecked = document.querySelector('#emailchecked');
+    const passwordChecked = document.querySelector('#passwordchecked');
+    const passwordConfirmationChecked = document.querySelector('#password_confirmationchecked');
 
     const validate = (element, checked, rule) => {
         if (rule) {
@@ -21,13 +21,13 @@ window.onload = () => {
         validate(name, nameChecked, e.target.value.length > 3)
     })
     email.addEventListener('input', (e) => {
-        validate(email, emailchecked, e.target.value.includes("@") && e.target.value.includes("."))
+        validate(email, emailChecked, e.target.value.includes("@") && e.target.value.includes("."))
     })
     password.addEventListener('input', (e) => {
-        validate(password, passwordchecked, e.target.value.length > 3)
+        validate(password, passwordChecked, e.target.value.length > 3)
     })
-    password_confirmation.addEventListener('input', (e) => {
-        validate(password_confirmation, password_confirmationchecked, e.target.value === password.value)
+    passwordConfirmation.addEventListener('input', (e) => {
+        validate(passwordConfirmation, passwordConfirmationChecked, e.target.value === password.value)
     })
 
 };
