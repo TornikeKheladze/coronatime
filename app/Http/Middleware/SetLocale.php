@@ -17,7 +17,7 @@ class SetLocale
 	 */
 	public function handle(Request $request, Closure $next)
 	{
-		$lang = substr($request->getUri(), -2);
+		$lang = substr($request->getPathInfo(), 1, 2);
 
 		app()->setLocale($lang);
 
