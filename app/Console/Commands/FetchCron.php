@@ -44,6 +44,7 @@ class FetchCron extends Command
 				'deaths'   => $statistics['deaths'],
 			];
 			Countries::updateOrCreate($attributes);
+			$this->info('Countries fetched successfully');
 		}
 	}
 }

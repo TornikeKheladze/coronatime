@@ -10,9 +10,9 @@
             <form method="POST" action="{{ route('password.update', ['lang' => app()->getLocale()]) }}"
                 class="flex flex-col lg:h-min  lg:justify-start h-screen gap-7 mb-10">
                 @csrf
-                <x-input type="email" name="email" label="email" placeholder="email" />
+                <input type="hidden" name="email" value="{{ request('email') }}" />
 
-                <input type="hidden" name="token" value="{{ $token }}" />
+                <input type="hidden" name="token" value="{{ $token }}" />                
                 <x-input type="password" name="password" label="{{ __('sing-up.new_pas') }}"
                     placeholder="{{ __('sing-up.enter_new') }}" />
                 <x-input type="password" name="password_confirmation" label="{{ __('sing-up.repeat_password') }}"

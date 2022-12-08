@@ -57,7 +57,7 @@ class AuthController extends Controller
 		return redirect()->route('worldwide', ['lang'=>app()->getLocale()]);
 	}
 
-	public function verifyAccount($token)
+	public function verifyAccount($lang, $token)
 	{
 		$verifyUser = UsersVerify::where('token', $token)->first();
 
@@ -95,7 +95,7 @@ class AuthController extends Controller
 		$request->validate([
 			'token'    => 'required',
 			'email'    => 'required|email',
-			'password' => 'required|min:8|confirmed',
+			'password' => 'required|min:3|confirmed',
 		]);
 
 		$status = Password::reset(
@@ -111,8 +111,6 @@ class AuthController extends Controller
 			}
 		);
 
-		return $status === Password::PASSWORD_RESET
-					? redirect()->route('success.password', ['lang'=>app()->getLocale()])->with('status', __($status))
-					: back()->withErrors(['email' => [__($status)]]);
+		return redirect()->route('success.password', ['lang'=>app()->getLocale()])->with('status', __($status));
 	}
 }
