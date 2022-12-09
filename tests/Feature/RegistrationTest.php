@@ -34,14 +34,14 @@ class RegistrationTest extends TestCase
 
 	public function test_if_registration_page_is_shown()
 	{
-		$response = $this->get('/{lang}/singup');
+		$response = $this->get(route('register.show', ['lang'=>app()->getLocale()]));
 
 		$response->assertViewIs('singup');
 	}
 
 	public function test_if_username_is_not_provided_should_return_error()
 	{
-		$response = $this->post('/{lang}/register', [
+		$response = $this->post(route('register.store', ['lang'=>app()->getLocale()]), [
 			'email'                => 'tornike@redberry.ge',
 			'password'             => 'my-password',
 			'password_confirmation'=> 'my-password',
@@ -57,7 +57,7 @@ class RegistrationTest extends TestCase
 
 	public function test_if_email_is_not_provided_should_return_error()
 	{
-		$response = $this->post('/{lang}/register', [
+		$response = $this->post(route('register.store', ['lang'=>app()->getLocale()]), [
 			'name'                 => 'toko',
 			'password'             => 'my-password',
 			'password_confirmation'=> 'my-password',
@@ -73,7 +73,7 @@ class RegistrationTest extends TestCase
 
 	public function test_if_password_is_not_provided_should_return_error()
 	{
-		$response = $this->post('/{lang}/register', [
+		$response = $this->post(route('register.store', ['lang'=>app()->getLocale()]), [
 			'name'                 => 'toko',
 			'email'                => 'tornike@redberry.ge',
 		]);
@@ -87,7 +87,7 @@ class RegistrationTest extends TestCase
 
 	public function test_if_password_provided_wrong_should_return_error()
 	{
-		$response = $this->post('/{lang}/register', [
+		$response = $this->post(route('register.store', ['lang'=>app()->getLocale()]), [
 			'name'                              => 'toko',
 			'email'                             => 'tornike@redberry.ge',
 			'password'                          => 'sm',
@@ -103,7 +103,7 @@ class RegistrationTest extends TestCase
 
 	public function test_if_password_confirmation_is_wrong_should_return_error()
 	{
-		$response = $this->post('/{lang}/register', [
+		$response = $this->post(route('register.store', ['lang'=>app()->getLocale()]), [
 			'name'                 => 'toko',
 			'email'                => 'tornike@redberry.ge',
 			'password'             => 'my-password',
@@ -119,13 +119,13 @@ class RegistrationTest extends TestCase
 
 	public function test_if_registration_is_complete_should_redirect()
 	{
-		$response = $this->post('/{lang}/register');
+		$response = $this->post(route('register.store', ['lang'=>app()->getLocale()]));
 		$response->assertStatus(302);
 	}
 
 	public function test_if_user_name_is_already_taken_should_return_error()
 	{
-		$response = $this->post('/{lang}/register', [
+		$response = $this->post(route('register.store', ['lang'=>app()->getLocale()]), [
 			'name'                 => 'tornike',
 			'email'                => 'tornike@redberry.ge',
 			'password'             => 'my-password',
@@ -137,7 +137,7 @@ class RegistrationTest extends TestCase
 
 	public function test_if_email_is_already_taken_should_return_error()
 	{
-		$response = $this->post('/{lang}/register', [
+		$response = $this->post(route('register.store', ['lang'=>app()->getLocale()]), [
 			'name'                 => 'toko',
 			'email'                => 'xeladze@redberry.ge',
 			'password'             => 'my-password',
@@ -149,7 +149,7 @@ class RegistrationTest extends TestCase
 
 	public function test_user_should_created_after_succesfull_registration()
 	{
-		$response = $this->post('/{lang}/register', [
+		$response = $this->post(route('register.store', ['lang'=>app()->getLocale()]), [
 			'name'                 => 'toko',
 			'email'                => 'toko@redberry.ge',
 			'password'             => 'my-password',
@@ -168,7 +168,7 @@ class RegistrationTest extends TestCase
 
 	public function test_forgot_password()
 	{
-		$response = $this->post('/{lang}/forgot-password', ['email'=>$this->user->email]);
+		$response = $this->post(route('password.email', ['lang'=>app()->getLocale()]), ['email'=>$this->user->email]);
 		$response->assertStatus(302);
 	}
 
@@ -176,7 +176,7 @@ class RegistrationTest extends TestCase
 	{
 		$user = $this->user;
 		$token = Password::createToken($user);
-		$response = $this->post('/{lang}/reset-password', [
+		$response = $this->post(route('password.update', ['lang'=>app()->getLocale()]), [
 			'token'                => $token,
 			'email'                => $this->user->email,
 			'password'             => 'password',

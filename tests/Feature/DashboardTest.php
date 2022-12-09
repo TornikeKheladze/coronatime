@@ -25,7 +25,7 @@ class DashboardTest extends TestCase
 
 	public function test_if_worldwide_page_is_shown()
 	{
-		$response = $this->actingAs($this->user)->get('/{lang}/worldwide');
+		$response = $this->actingAs($this->user)->get(route('worldwide', ['lang'=>app()->getLocale()]));
 
 		$response->assertSuccessful();
 		$response->assertViewHasAll([
@@ -37,7 +37,7 @@ class DashboardTest extends TestCase
 
 	public function test_if_bycountry_page_is_shown()
 	{
-		$response = $this->actingAs($this->user)->get('/{lang}/bycountry');
+		$response = $this->actingAs($this->user)->get(route('bycountry', ['lang'=>app()->getLocale()]));
 
 		$response->assertSuccessful();
 		$response->assertViewHasAll([
