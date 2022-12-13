@@ -168,9 +168,3 @@ For more information about project standards, take a look at these docs:
 </br>
 
 [Drawsql link](https://drawsql.app/teams/redberry-32/diagrams/coronatime/embed) - DrawSQL software to create, visualize and collaborate on database entity relationship diagrams.
-
-<<<<<<< HEAD
-#
-=======
-#
->>>>>>> 493794562e330b13ce918f8f295a6379b746ecd8
