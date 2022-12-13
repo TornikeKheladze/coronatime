@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Coronatime </title>
+    <link rel="icon" href="{{ URL::asset('corona.png') }}" type="image/x-icon"/>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 

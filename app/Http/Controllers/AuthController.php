@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -31,7 +33,7 @@ class AuthController extends Controller
 			$message->to($request->email);
 			$message->subject('Email Verification Mail');
 		});
-		return redirect()->route('confirmation', ['lang'=>app()->getLocale()]);
+		return redirect()->route('confirmation', ['lang' => app()->getLocale()]);
 	}
 
 	public function login(StoreAuthRequest $request)
@@ -39,55 +41,57 @@ class AuthController extends Controller
 		$attributes = $request->validated();
 		$isEmail = Str::contains($attributes['name_mail'], '@');
 		$credentials['password'] = $attributes['password'];
-		if ($isEmail)
-		{
+		if ($isEmail) {
 			$credentials['email'] = $attributes['name_mail'];
-		}
-		else
-		{
+		} else {
 			$credentials['name'] = $attributes['name_mail'];
 		}
 
-		if (!auth()->attempt($credentials))
-		{
-			throw ValidationException::withMessages(['password'=>__('auth.failed')]);
+		if (!auth()->attempt($credentials)) {
+			throw ValidationException::withMessages(['password' => __('auth.failed')]);
 		}
 
 		session()->regenerate();
-		return redirect()->route('worldwide', ['lang'=>app()->getLocale()]);
+		return redirect()->route('worldwide', ['lang' => app()->getLocale()]);
 	}
 
 	public function verifyAccount($lang, $token)
 	{
 		$verifyUser = UsersVerify::where('token', $token)->first();
 
-		if (!is_null($verifyUser))
-		{
+		if (!is_null($verifyUser)) {
 			$user = $verifyUser->user;
 			$verifyUser->user->email_verified_at = now();
 			$verifyUser->user->save();
 		}
 
-		return redirect()->route('verified.account', ['lang'=>app()->getLocale()]);
+		return redirect()->route('verified.account', ['lang' => app()->getLocale()]);
 	}
 
 	public function logout()
 	{
 		auth()->logout();
-		return redirect()->route('login.show', ['lang'=>app()->getLocale()]);
+		return redirect()->route('login.show', ['lang' => app()->getLocale()]);
 	}
 
 	public function postVerificationMail(Request $request)
 	{
 		$request->validate(['email' => 'required|email']);
 
-		$status = Password::sendResetLink(
-			$request->only('email')
-		);
+		$token = Str::random(64);
 
-		return $status === Password::RESET_LINK_SENT
-					? redirect()->route('confirmation', ['lang'=>app()->getLocale()])->with(['status' => __($status)])
-					: back()->withErrors(['email' => __($status)]);
+		DB::table('password_resets')->insert([
+			'email' => $request->email,
+			'token' => $token,
+			'created_at' => Carbon::now()
+		]);
+
+		Mail::send('email.passwordResetEmail', ['token' => $token, 'email' => $request->email], function ($message) use ($request) {
+			$message->to($request->email);
+			$message->subject('Reset Password');
+		});
+
+		return redirect()->route('confirmation', ['lang' => app()->getLocale()]);
 	}
 
 	public function postResetPassword(Request $request)
@@ -98,19 +102,19 @@ class AuthController extends Controller
 			'password' => 'required|min:3|confirmed',
 		]);
 
-		$status = Password::reset(
-			$request->only('email', 'password', 'password_confirmation', 'token'),
-			function ($user, $password) {
-				$user->forceFill([
-					'password' => Hash::make($password),
-				])->setRememberToken(Str::random(60));
 
-				$user->save();
+		$updatePassword = DB::table('password_resets')
+			->where([
+				'email' => $request->email,
+				'token' => $request->token
+			])
+			->first();
 
-				event(new PasswordReset($user));
-			}
-		);
+		$user = User::where('email', $request->email)
+			->update(['password' => Hash::make($request->password)]);
 
-		return redirect()->route('success.password', ['lang'=>app()->getLocale()])->with('status', __($status));
+		DB::table('password_resets')->where(['email' => $request->email])->delete();
+
+		return redirect()->route('success.password', ['lang' => app()->getLocale()]);
 	}
 }
