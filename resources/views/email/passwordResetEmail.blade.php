@@ -10,14 +10,31 @@
 </head>
 
 <body>
-    <div class="w-screen h-screen flex flex-col items-center justify-center gap-4">
+    <div>
 
-        <img src="{{ asset('images/email.png') }}" />
-        <h1 class="font-black text-2xl mt-10">Confirmation email</h1>
-        <p>click this button to reset password</p>
-        <a href="{{ route('password.reset', ['token' => $token, 'lang' => app()->getLocale(),'email'=>$email]) }}"
-            class="mt-8 w-96 flex justify-center items-center bg-green-500 rounded-lg h-14 font-black text-white text-lg">
-            reset password</a>
+        <img style="display: block; text-align: center; " src="{{ asset('images/email.png') }}" />
+        <h1 style="display: block; text-align: center; 
+                    color: #010414;
+                    font-size: 25px;">Confirmation email</h1>
+        <p style="display: block; text-align: center; 
+                font-size: 18px;
+                line-height: 22px;
+                color: #010414;">click this button to recover a password</p>
+        <a style="display: block;
+                text-align: center;
+                background-color: rgb(34,197,94);
+                width: 24rem;
+                margin: auto;
+                padding-top: 19px;
+                padding-bottom: 19px;
+                color: rgb(255,255,255);
+                text-decoration: none;
+                font-weight: 900;
+                border-radius: 8px;
+                font-size: 16px;
+            "  href="{{ route('password.reset', ['token' => $token, 'lang' => app()->getLocale(),'email'=>$email]) }}"
+          >
+            RECOVER PASSWORD</a>
            
     </div>
 </body>

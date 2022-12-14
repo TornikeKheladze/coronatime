@@ -26,16 +26,6 @@
                 <x-input type="password" name="password_confirmation" label="{{ __('sing-up.repeat_password') }}"
                     placeholder="{{ __('sing-up.repeat_password') }}" />
 
-                <div class="flex justify-between">
-                    <div class="text-sm font-semibold flex gap-2">
-                        <input id="default-checkbox" type="checkbox" value=""
-                            class="w-4 h-4 accent-green-600 text-green-600 bg-gray-100 rounded border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <label for="default-checkbox" class="flex items-center mb-4">
-                            {{ __('log-in.remember') }}
-                        </label>
-                    </div>
-
-                </div class="flex justify-between">
                 <x-button text="{{ __('sing-up.sing_up') }}" />
             </form>
             <p class="text-center"><span class="text-zinc-500">{{ __('sing-up.have_account?') }}</span>
@@ -44,7 +34,7 @@
             </p>
         </div>
         <div class="hidden lg:block h-screen">
-            <img src="{{ asset('images/corona.png') }}" />
+            <img class="h-full" src="{{ asset('images/corona.png') }}" />
         </div>
     </div>
 

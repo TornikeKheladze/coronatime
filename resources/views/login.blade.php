@@ -15,11 +15,19 @@
                     placeholder="{{ __('log-in.uniq_emil') }}" />
                 <x-input type="password" name="password" label="{{ __('log-in.password') }}"
                     placeholder="{{ __('log-in.fill_password') }}" />
-
+                <div class="flex justify-between">
+                    <div class="text-sm font-semibold flex gap-2">
+                        <input id="default-checkbox" type="checkbox" value=""
+                            class="w-4 h-4 accent-green-600 text-green-600 bg-gray-100 rounded border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                        <label for="default-checkbox" class="flex items-center mb-4">
+                            {{ __('log-in.remember') }}
+                        </label>
+                    </div>
                 <div class="flex justify-between">
                     <a href="{{ route('password.request', ['lang' => app()->getLocale()]) }}"
-                        class="text-blue-800 text-sm font-semibold">{{ __('log-in.forgot') }}</a>
+                        class="text-blue-700 text-sm font-semibold">{{ __('log-in.forgot') }}</a>
                 </div>
+                </div>               
 
 
                 <x-button text="{{ __('log-in.login') }}" />
@@ -31,7 +39,7 @@
             </p>
         </div>
         <div class="hidden lg:block h-screen">
-            <img src="{{ asset('images/corona.png') }}" />
+            <img class="h-full" src="{{ asset('images/corona.png') }}" />
         </div>
     </div>
 
