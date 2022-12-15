@@ -12,7 +12,7 @@
 <body>
     <div>
 
-        <img style="display: block; text-align: center; " src="{{ asset('images/email.png') }}" />
+        <img style="display: block; text-align: center; margin: auto;" src="{{ asset('images/email.png') }}" />
         <h1 style="display: block; text-align: center; 
                     color: #010414;
                     font-size: 25px;">Confirmation email</h1>
