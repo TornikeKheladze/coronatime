@@ -29,7 +29,7 @@ class AuthController extends Controller
 			'user_id' => $createUser->id,
 			'token'   => $token,
 		]);
-		Mail::send('email.emailVerificationEmail', ['token' => $token], function ($message) use ($request) {
+		Mail::send('email.email-verification', ['token' => $token], function ($message) use ($request) {
 			$message->to($request->email);
 			$message->subject('Email Verification Mail');
 		});
@@ -86,7 +86,7 @@ class AuthController extends Controller
 			'created_at' => Carbon::now()
 		]);
 
-		Mail::send('email.passwordResetEmail', ['token' => $token, 'email' => $request->email], function ($message) use ($request) {
+		Mail::send('email.password-reset-email', ['token' => $token, 'email' => $request->email], function ($message) use ($request) {
 			$message->to($request->email);
 			$message->subject('Reset Password');
 		});
@@ -116,5 +116,9 @@ class AuthController extends Controller
 		DB::table('password_resets')->where(['email' => $request->email])->delete();
 
 		return redirect()->route('success.password', ['lang' => app()->getLocale()]);
+	}
+	public function getResetPassword($token)
+	{
+		return view('reset-password', ['token' => $token, 'lang' => app()->getLocale()]);
 	}
 }

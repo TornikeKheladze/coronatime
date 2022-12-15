@@ -13,19 +13,19 @@
             class="lg:w-96 lg:h-64 w-343 h-48 col-span-full justify-self-center lg:pt-10 lg:pb-10 pb-6 pt-6 bg-opacity-10 flex flex-col items-center justify-end rounded-2xl bg-blue-700">
             <x-newcases />
             <h1 class="mt-6">{{ __('landing.newcases') }}</h1>
-            <h2 class="text-blue-700 mt-4 text-4xl font-black">{{ $newcases }}</h2>
+            <h2 class="text-blue-700 mt-4 text-2xl lg:text-4xl font-black">{{ $newcases }}</h2>
         </div>
         <div
             class="lg:w-96 lg:h-64 w-40 h-48 bg-opacity-10 lg:pt-10 lg:pb-10 pb-6 pt-6 flex flex-col items-center justify-end rounded-2xl bg-green-500">
             <x-recovered />
             <h1 class="mt-6">{{ __('landing.recovered') }}</h1>
-            <h2 class="text-green-500 mt-6 text-4xl font-black">{{ $recovered }}</h2>
+            <h2 class="text-green-500 mt-6 text-2xl lg:text-4xl font-black">{{ $recovered }}</h2>
         </div>
         <div
             class=" lg:w-96 lg:h-64 w-40 h-48 bg-opacity-10 lg:pt-10 lg:pb-10 pb-6 pt-6 flex flex-col items-center justify-end rounded-2xl bg-yellow-400">
             <x-death />
             <h1 class="mt-6">{{ __('landing.death') }}</h1>
-            <h2 class="text-yellow-400 mt-4 text-4xl font-black">{{ $death }}</h2>
+            <h2 class="text-yellow-400 mt-4 text-2xl lg:text-4xl font-black">{{ $death }}</h2>
         </div>
     </div>
 

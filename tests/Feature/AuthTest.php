@@ -12,20 +12,20 @@ class AuthTest extends TestCase
 
 	public function test_login_page_is_accessible()
 	{
-		$response = $this->get(route('login.show', ['lang'=>app()->getLocale()]));
+		$response = $this->get(route('login.show', ['lang' => app()->getLocale()]));
 		$response->assertSuccessful();
 		$response->assertViewIs('login');
 	}
 
 	public function test_logout_is_successful()
 	{
-		$response = $this->post(route('logout', ['lang'=>app()->getLocale()]));
+		$response = $this->post(route('logout', ['lang' => app()->getLocale()]));
 		$response->assertStatus(302);
 	}
 
 	public function test_auth_should_give_us_error_if_input_is_not_provided()
 	{
-		$response = $this->post(route('login', ['lang'=>app()->getLocale()]));
+		$response = $this->post(route('login', ['lang' => app()->getLocale()]));
 		$response->assertSessionHasErrors([
 			'name_mail',
 			'password',
@@ -34,7 +34,7 @@ class AuthTest extends TestCase
 
 	public function test_auth_should_give_us_error_if_email_input_is_not_provided()
 	{
-		$response = $this->post(route('login', ['lang'=>app()->getLocale()]), ['password'=>'my-password']);
+		$response = $this->post(route('login', ['lang' => app()->getLocale()]), ['password' => 'my-password']);
 
 		$response->assertSessionHasErrors(['name_mail']);
 		$response->assertSessionDoesntHaveErrors(['password']);
@@ -42,7 +42,7 @@ class AuthTest extends TestCase
 
 	public function test_auth_should_give_us_error_if_password_input_is_not_provided()
 	{
-		$response = $this->post(route('login', ['lang'=>app()->getLocale()]), ['name_mail'=>'myemail@gmail.com']);
+		$response = $this->post(route('login', ['lang' => app()->getLocale()]), ['name_mail' => 'myemail@gmail.com']);
 
 		$response->assertSessionHasErrors(['password']);
 		$response->assertSessionDoesntHaveErrors(['name_mail']);
@@ -50,8 +50,8 @@ class AuthTest extends TestCase
 
 	public function test_auth_should_give_us_credentials_error_if_such_user_does_not_exists()
 	{
-		$response = $this->post(route('login', ['lang'=>app()->getLocale()]), [
-			'name_mail'=> 'myemail@gmail.com',
+		$response = $this->post(route('login', ['lang' => app()->getLocale()]), [
+			'name_mail' => 'myemail@gmail.com',
 			'password' => 'password',
 		]);
 
@@ -68,7 +68,7 @@ class AuthTest extends TestCase
 			'password'         => bcrypt($password),
 		]);
 
-		$response = $this->post(route('login', ['lang'=>app()->getLocale()]), [
+		$response = $this->post(route('login', ['lang' => app()->getLocale()]), [
 			'name_mail'                             => $email,
 			'password'                              => $password,
 		]);
@@ -87,7 +87,7 @@ class AuthTest extends TestCase
 			'password'         => bcrypt($password),
 		]);
 
-		$response = $this->post(route('login', ['lang'=>app()->getLocale()]), [
+		$response = $this->post(route('login', ['lang' => app()->getLocale()]), [
 			'name_mail'                             => $name,
 			'password'                              => $password,
 		]);

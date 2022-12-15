@@ -6,7 +6,7 @@ use App\Models\Countries;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
-class FetchCron extends Command
+class FetchStatistics extends Command
 {
 	/**
 	 * The name and signature of the console command.
@@ -31,15 +31,14 @@ class FetchCron extends Command
 	{
 		$countries = Http::get('https://devtest.ge/countries')->json();
 
-		foreach ($countries as $country)
-		{
+		foreach ($countries as $country) {
 			$statistics = Http::post('https://devtest.ge/get-country-statistics', ['code' => $country['code']])->json();
 
 			$attributes = [
 				'code'     => $statistics['code'],
 				'country'  => $country['name'],
-				'confirmed'=> $statistics['confirmed'],
-				'recovered'=> $statistics['recovered'],
+				'confirmed' => $statistics['confirmed'],
+				'recovered' => $statistics['recovered'],
 				'critical' => $statistics['critical'],
 				'deaths'   => $statistics['deaths'],
 			];
