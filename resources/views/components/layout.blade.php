@@ -9,6 +9,19 @@
     <link rel="icon" href="{{ URL::asset('corona.png') }}" type="image/x-icon"/>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    <style>
+        #scrollbar::-webkit-scrollbar {
+            margin-top:50px;
+            width: 6px;
+        }
+        #scrollbar::-webkit-scrollbar-thumb {
+            background: #808189;
+            border-radius: 8px;
+            height: 56px;
+            
+        }
+       
+    </style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

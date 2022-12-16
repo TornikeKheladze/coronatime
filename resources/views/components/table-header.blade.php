@@ -17,7 +17,7 @@
     }
 @endphp
 
-<div class="bg-neutral-100 flex items-center lg:h-14 lg:pl-10 lg:w-full w-96">
+<div class="bg-neutral-100 flex items-center lg:h-14 lg:pl-10 lg:w-full w-96 sticky top-0">
     <div class="lg:w-64 w-1/4 flex items-center gap-2 text-sm font-semibold">
         <a
             href="{{ request()->fullUrlWithQuery(['sort' => 'country', 'by' => $sortCountry]) }}">{{ __('landing.location') }}</a>

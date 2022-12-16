@@ -7,7 +7,7 @@
             <a class="font-bold border-b-2 pb-4 border-black">{{ __('landing.by-country') }}</a>
         </div>
     </div>
-    <form method="GET" action="" class="lg:ml-28 ml-4">
+    <form method="GET" action="" class="lg:ml-28 ml-4 lg:mb-10 mb-2">
         <div class="w-72 flex justify-center items-center border h-12 border-neutral-200 rounded-lg">
             <label for="search">
                 <img class="" src="{{ asset('images/search.png') }}" />
@@ -16,7 +16,7 @@
                 class="w-10/12 h-full pl-4 focus:border-none" value="{{ request('search') }}" />
         </div>
     </form>
-    <div class="lg:ml-28 lg:mr-28 ml-4 mr-4">
+    <div id="scrollbar" class="lg:ml-28 lg:mr-28 ml-4 mr-4 lg:h-600 relative overflow-scroll">
         <x-table-header />
         <div class="flex lg:pl-10 lg:w-full w-96">
             <p class="lg:w-64 w-1/4">{{ __('landing.worldwide') }}</p>
