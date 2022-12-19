@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Countries;
+use App\Models\Country;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -42,7 +42,7 @@ class FetchStatistics extends Command
 				'critical' => $statistics['critical'],
 				'deaths'   => $statistics['deaths'],
 			];
-			Countries::updateOrCreate($attributes);
+			Country::updateOrCreate($attributes);
 			$this->info('Countries fetched successfully');
 		}
 	}
