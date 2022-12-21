@@ -16,9 +16,9 @@
                 class="w-10/12 h-full pl-4 focus:border-none" value="{{ request('search') }}" />
         </div>
     </form>
-    <div id="scrollbar" class="lg:ml-28 lg:mr-28 ml-4 mr-4 lg:h-600 relative overflow-scroll">
+    <div id="scrollbar" class="lg:ml-28 lg:mr-28 ml-4 mr-4 lg:h-600 relative overflow-scroll lg:border border-neutral-100 rounded-lg">
         <x-table-header />
-        <div class="flex lg:pl-10 lg:w-full w-96">
+        <div class="flex lg:pl-10 lg:w-full w-96 pb-4 pt-4 border-b border-neutral-100">
             <p class="lg:w-64 w-1/4">{{ __('landing.worldwide') }}</p>
             <p class="lg:w-64 w-1/4">{{ $newcases }}</p>
             <p class="lg:w-64 w-1/4">{{ $recovered }}</p>
@@ -26,7 +26,7 @@
         </div>
 
         @foreach ($countries as $country)
-            <div class="flex lg:pl-10 lg:w-full w-96">
+            <div class="flex lg:pl-10 lg:w-full w-96 pb-4 pt-4 border-b border-neutral-100">
                 <p class="lg:w-64 w-1/4">{{ $country->country }}</p>
                 <p class="lg:w-64 w-1/4">{{ $country->confirmed }}</p>
                 <p class="lg:w-64 w-1/4">{{ $country->recovered }}</p>

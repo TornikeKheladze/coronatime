@@ -5,7 +5,7 @@
     </label>
     <input class="border border-gr rounded-lg p-6 w-full h-14 focus:outline-none focus:ring-1 focus:border-blue-600" placeholder="{{ $placeholder }}"
         type={{ $type }} name="{{ $name }}" id="{{ $name }}" value="{{ old($name) }}"
-        required />
+        />
     @error($name)
         <p class="text-red-500 text-xs mt-1 flex items-center gap-2">
             <img src="{{ asset('images/error.png') }}" /><span>{{ $message }}</span>
