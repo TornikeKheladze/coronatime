@@ -5,7 +5,7 @@ return [
 	'welcome_back'                                  => 'Welcome back! Please enter your details',
 	'username'                                      => 'Username',
 	'uniq_emil'                                     => 'Enter unique username or email',
-	'password'                                      => 'password',
+	'password'                                      => 'Password',
 	'fill_password'                                 => 'Fill in password',
 	'remember'                                      => 'Remember this device',
 	'forgot'                                        => 'Forgot password?',

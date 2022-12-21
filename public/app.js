@@ -16,7 +16,7 @@ window.onload = () => {
         if (rule) {
             element.classList.add("border-green-600");
             checked.classList.remove("hidden");
-            checked.classList.remove("border-gr");
+            element.classList.remove("border-gr");
         } else {
             element.classList.remove("border-green-600");
             checked.classList.add("hidden");
