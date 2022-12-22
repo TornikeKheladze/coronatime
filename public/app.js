@@ -14,11 +14,10 @@ window.onload = () => {
 
     const validate = (element, checked, rule) => {
         if (rule) {
-            element.classList.add("border-green-600");
+            element.classList.add("val");
             checked.classList.remove("hidden");
-            element.classList.remove("border-gr");
         } else {
-            element.classList.remove("border-green-600");
+            element.classList.remove("val");
             checked.classList.add("hidden");
         }
     };

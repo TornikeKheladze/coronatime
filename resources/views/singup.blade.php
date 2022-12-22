@@ -10,7 +10,7 @@
             <h3 class="text-gray-400">
                 {{ __('sing-up.enter_info') }}
             </h3>
-            <form method="POST" action="{{ route('register.store', ['lang' => app()->getLocale()]) }}"
+            <form id="validate" method="POST" action="{{ route('register.store', ['lang' => app()->getLocale()]) }}"
                 class="flex flex-col gap-6" enctype="multipart/form-data">
                 @csrf
 
