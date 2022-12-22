@@ -3,7 +3,8 @@
     <label for="{{ $name }}" class="text-black text-sm lg:text-base font-bold mb-2">
         {{ $label }}
     </label>
-    <input class="border border-gr rounded-lg p-6 w-full h-14 focus:outline-none focus:ring-1 focus:border-blue-600" placeholder="{{ $placeholder }}"
+    {{-- focus:outline-none focus:ring-1 focus:border-blue-600 --}}
+    <input class="border border-neutral-200 rounded-lg p-6 w-full h-14 " placeholder="{{ $placeholder }}"
         type={{ $type }} name="{{ $name }}" id="{{ $name }}" value="{{ old($name) }}"
         />
     @error($name)
