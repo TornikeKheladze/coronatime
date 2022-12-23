@@ -1,44 +1,49 @@
 window.onload = () => {
-    const name = document.querySelector("#name");
-    const email = document.querySelector("#email");
     const password = document.querySelector("#password");
-    const passwordConfirmation = document.querySelector(
-        "#password_confirmation"
-    );
-    const nameChecked = document.querySelector("#namechecked");
-    const emailChecked = document.querySelector("#emailchecked");
-    const passwordChecked = document.querySelector("#passwordchecked");
-    const passwordConfirmationChecked = document.querySelector(
-        "#password_confirmationchecked"
-    );
+    const inputs = document.querySelectorAll("input");
 
-    const validate = (element, checked, rule) => {
+    inputs.forEach((input) => {
+        if (input.name === "password") {
+            input.addEventListener("input", (e) => {
+                validate(input, e.target.value.length > 3);
+            });
+        }
+        if (input.name === "password_confirmation") {
+            input.addEventListener("input", (e) => {
+                validate(input, e.target.value === password.value);
+            });
+        }
+        if (input.name === "email") {
+            input.addEventListener("input", (e) => {
+                validate(
+                    input,
+                    e.target.value.includes("@") && e.target.value.includes(".")
+                );
+            });
+        }
+        if (input.name === "name") {
+            input.addEventListener("input", (e) => {
+                validate(input, e.target.value.length > 3);
+            });
+        }
+        if (input.name === "name_mail") {
+            input.addEventListener("input", (e) => {
+                validate(input, e.target.value.length > 3);
+            });
+        }
+    });
+
+    const validate = (element, rule) => {
         if (rule) {
             element.classList.add("val");
-            checked.classList.remove("hidden");
+            document
+                .querySelector(`#${element.name}checked`)
+                .classList.remove("hidden");
         } else {
             element.classList.remove("val");
-            checked.classList.add("hidden");
+            document
+                .querySelector(`#${element.name}checked`)
+                .classList.add("hidden");
         }
     };
-    name.addEventListener("input", (e) => {
-        validate(name, nameChecked, e.target.value.length > 3);
-    });
-    email.addEventListener("input", (e) => {
-        validate(
-            email,
-            emailChecked,
-            e.target.value.includes("@") && e.target.value.includes(".")
-        );
-    });
-    password.addEventListener("input", (e) => {
-        validate(password, passwordChecked, e.target.value.length > 3);
-    });
-    passwordConfirmation.addEventListener("input", (e) => {
-        validate(
-            passwordConfirmation,
-            passwordConfirmationChecked,
-            e.target.value === password.value
-        );
-    });
 };

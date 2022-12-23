@@ -1,5 +1,4 @@
 <x-layout>
-    <script src="{{ asset('app.js') }}"></script>
 
     <div class="flex justify-center lg:justify-between lg:items-start">
         <div class="w-80 lg:w-96 lg:ml-28 flex flex-col gap-6 mt-10">

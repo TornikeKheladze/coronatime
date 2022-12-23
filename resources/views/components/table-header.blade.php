@@ -29,12 +29,12 @@
         <x-sort-icons sortKey='confirmed' />
     </div>
     <div class="lg:w-64 w-1/4 flex items-center gap-2 text-sm font-semibold">
-        <a
+        <a class="break-all text-center"
             href="{{ request()->fullUrlWithQuery(['sort' => 'recovered', 'by' => $sortRecovered]) }}">{{ __('landing.recovered') }}</a>
         <x-sort-icons sortKey='recovered' />
     </div>
     <div class="lg:w-64 w-1/4 flex items-center gap-2 text-sm font-semibold">
-        <a
+        <a class="break-all text-center"
             href="{{ request()->fullUrlWithQuery(['sort' => 'deaths', 'by' => $sortDeaths]) }}">{{ __('landing.death') }}</a>
         <x-sort-icons sortKey='deaths' />
     </div>

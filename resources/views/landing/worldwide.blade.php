@@ -18,8 +18,8 @@
         <div
             class="md:w-96 md:h-64 w-40 h-48 bg-opacity-10 md:pt-10 md:pb-10 pb-6 pt-6 flex flex-col items-center justify-end rounded-2xl bg-green-500">
             <x-recovered />
-            <h1 class="mt-6">{{ __('landing.recovered') }}</h1>
-            <h2 class="text-green-500 mt-6 text-2xl md:text-4xl font-black">{{ $recovered }}</h2>
+            <h1 class="lg:mt-6 mt-3 break-all text-center">{{ __('landing.recovered') }}</h1>
+            <h2 class="text-green-500 lg:mt-6 mt-3 text-2xl md:text-4xl font-black">{{ $recovered }}</h2>
         </div>
         <div
             class=" md:w-96 md:h-64 w-40 h-48 bg-opacity-10 md:pt-10 md:pb-10 pb-6 pt-6 flex flex-col items-center justify-end rounded-2xl bg-yellow-400">

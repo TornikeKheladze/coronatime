@@ -9,7 +9,7 @@ return [
 	'fill_password'                                 => 'Fill in password',
 	'remember'                                      => 'Remember this device',
 	'forgot'                                        => 'Forgot password?',
-	'login'                                         => 'log in',
+	'login'                                         => 'LOG IN',
 	'dont_have_account'                             => 'Don t have and account?',
 	'sing_free'                                     => 'Sign up for free',
 ];
